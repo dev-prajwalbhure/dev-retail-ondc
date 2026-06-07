@@ -64,13 +64,14 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', backgroundColor: 'var(--bg-secondary)', overflow: 'hidden', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--bg-secondary)', overflow: 'hidden', position: 'relative' }}>
       
-      {/* Decorative Background Elements */}
-      <div style={{ position: 'absolute', top: '-10%', left: '-5%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, var(--primary) 0%, transparent 70%)', opacity: 0.1, filter: 'blur(60px)', zIndex: 0 }} />
-      <div style={{ position: 'absolute', bottom: '-10%', right: '-5%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, #8b5cf6 0%, transparent 70%)', opacity: 0.1, filter: 'blur(60px)', zIndex: 0 }} />
+      {/* Decorative Background Elements - Hidden on Mobile */}
+      <div className="hide-on-mobile" style={{ position: 'absolute', top: '-10%', left: '-5%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, var(--primary) 0%, transparent 70%)', opacity: 0.1, filter: 'blur(60px)', zIndex: 0 }} />
+      <div className="hide-on-mobile" style={{ position: 'absolute', bottom: '-10%', right: '-5%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, #8b5cf6 0%, transparent 70%)', opacity: 0.1, filter: 'blur(60px)', zIndex: 0 }} />
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '2rem', zIndex: 1 }}>
+      <div style={{ display: 'flex', flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+        <div style={{ flex: '1 1 400px', display: 'flex', flexDirection: 'column', padding: '2rem', zIndex: 1, minHeight: '100vh' }}>
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -212,11 +213,12 @@ export const Login: React.FC = () => {
             </div>
           </motion.div>
         </div>
-      </div>
-      
-      <div style={{ flex: 1, backgroundColor: 'var(--primary)', padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: 'white' }}>
-        <h2 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem' }}>The Commerce OS for Everyone.</h2>
-        <p style={{ fontSize: '1.125rem', opacity: 0.9, maxWidth: '400px' }}>Join the open network and manage your entire business lifecycle from a single, unified dashboard.</p>
+        </div>
+        
+        <div className="hide-on-mobile" style={{ flex: '1 1 400px', backgroundColor: 'var(--primary)', padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: 'white', minHeight: '50vh' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem' }}>The Commerce OS for Everyone.</h2>
+          <p style={{ fontSize: '1.125rem', opacity: 0.9, maxWidth: '400px' }}>Join the open network and manage your entire business lifecycle from a single, unified dashboard.</p>
+        </div>
       </div>
     </div>
   );

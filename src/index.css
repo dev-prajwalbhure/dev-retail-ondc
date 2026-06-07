@@ -137,6 +137,82 @@ select.input {
   line-height: 1.5;
   white-space: nowrap;
 }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* --- Responsive Layout Utilities --- */
+@media (max-width: 768px) {
+  /* Reduce global padding on mobile */
+  :root {
+    font-size: 14px;
+  }
+  
+  .card {
+    padding: 1rem !important;
+  }
+  
+  /* Ensure data tables scroll horizontally instead of squishing */
+  table {
+    display: block;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    margin: 0 auto;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  /* Stack grid layouts that are using inline styles */
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Adjust padding on specific sections */
+  section {
+    padding: 3rem 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smaller mobile screens */
+  h1 { font-size: 2rem !important; }
+  h2 { font-size: 1.5rem !important; }
+}
+
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  .sidebar-container {
+    position: fixed;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar-container.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    padding: 1rem !important;
+  }
+
+  .header-actions {
+    gap: 0.5rem !important;
+  }
+  
+  .header-actions button {
+    padding: 0.5rem !important;
+  }
+}
+
 .btn:active {
   transform: scale(0.98);
 }

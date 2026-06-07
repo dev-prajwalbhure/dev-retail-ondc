@@ -11,11 +11,11 @@ export const MainLayout: React.FC = () => {
   const workspace = allWorkspaces.includes(path) ? path : 'seller';
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-base)' }}>
-      <Sidebar workspace={workspace} />
-      <div style={{ flex: 1, marginLeft: 'var(--sidebar-width)', display: 'flex', flexDirection: 'column' }}>
-        <Header workspace={workspace} />
-        <main style={{ flex: 1, padding: '1.5rem 2rem', overflowY: 'auto' }}>
+    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', backgroundColor: 'var(--bg-secondary)' }}>
+      <Sidebar />
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <Header />
+        <main className="main-content" style={{ flex: 1, overflowY: 'auto', padding: '1rem' }}>
           <Outlet />
         </main>
       </div>
