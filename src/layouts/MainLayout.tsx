@@ -12,9 +12,9 @@ export const MainLayout: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', backgroundColor: 'var(--bg-secondary)' }}>
-      <Sidebar />
+      <Sidebar workspace={workspace} />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-        <Header />
+        <Header workspace={workspace} />
         <main className="main-content" style={{ flex: 1, overflowY: 'auto', padding: '1rem' }}>
           <Outlet />
         </main>
