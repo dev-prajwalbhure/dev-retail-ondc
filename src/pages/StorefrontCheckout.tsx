@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../store';
-import { CreditCard, CheckCircle, MapPin, Package, AlertCircle } from 'lucide-react';
+import { CreditCard, CheckCircle, MapPin, Package, AlertCircle, Loader } from 'lucide-react';
+import { PaymentModal } from '../components/PaymentModal';
+import { AnimatePresence } from 'framer-motion';
 
 export const StorefrontCheckout: React.FC = () => {
   const navigate = useNavigate();
   const { cart, products, placeOrder } = useAppStore();
   
   const [step, setStep] = useState(1);
+  const [placing, setPlacing] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
   const [address, setAddress] = useState({
     name: 'Home',
     line1: '123 Commerce St',
@@ -38,9 +42,22 @@ export const StorefrontCheckout: React.FC = () => {
   const shipping = subtotal > 499 ? 0 : 49;
   const total = subtotal + tax + shipping;
 
+  const initiateCheckout = () => {
+    setShowPayment(true);
+  };
+
+  const handlePaymentSuccess = () => {
+    setShowPayment(false);
+    handlePlaceOrder();
+  };
+
   const handlePlaceOrder = () => {
-    placeOrder(address);
-    setStep(3); // Success step
+    setPlacing(true);
+    setTimeout(() => {
+        placeOrder(address);
+        setStep(3); // Success step
+        setPlacing(false);
+    }, 1500);
   };
 
   return (
@@ -146,8 +163,8 @@ export const StorefrontCheckout: React.FC = () => {
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <button className="btn" style={{ border: '1px solid var(--border)' }} onClick={() => setStep(1)}>Back</button>
-                  <button className="btn btn-primary" style={{ padding: '0.75rem 2rem', fontSize: '1.125rem' }} onClick={handlePlaceOrder}>
-                    Pay ₹{total.toLocaleString()} & Place Order
+                  <button className="btn btn-primary" style={{ padding: '0.75rem 2rem', fontSize: '1.125rem' }} onClick={initiateCheckout} disabled={placing}>
+                    {placing ? <Loader className="animate-spin" /> : `Pay ₹${total.toLocaleString()} & Place Order`}
                   </button>
                 </div>
               </div>
@@ -194,6 +211,17 @@ export const StorefrontCheckout: React.FC = () => {
 
         </div>
       )}
+
+      <AnimatePresence>
+        {showPayment && (
+          <PaymentModal 
+            isOpen={showPayment} 
+            onClose={() => setShowPayment(false)} 
+            onSuccess={handlePaymentSuccess} 
+            amount={total} 
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };

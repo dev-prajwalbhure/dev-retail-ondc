@@ -3,16 +3,16 @@ import { useEffect } from 'react';
 
 import MainLayout from './layouts/MainLayout';
 import AuthLayout from './layouts/AuthLayout';
-import StorefrontLayout from './layouts/StorefrontLayout';
+import { StorefrontLayout } from './layouts/StorefrontLayout';
 import { useAppStore } from './store';
 import { QuickSwitcher } from './components/QuickSwitcher';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Toaster } from 'react-hot-toast';
 
 // Auth
-import Landing from './pages/Landing';
+import { Landing } from './pages/Landing';
 import Login from './pages/Login';
-import Onboarding from './pages/Onboarding';
+import { Onboarding } from './pages/Onboarding';
 import ONDCAPIVisualizer from './pages/ONDCAPIVisualizer';
 
 // Storefront (Buyer)
